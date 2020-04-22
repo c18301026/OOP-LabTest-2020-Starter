@@ -43,6 +43,20 @@ public class Gantt extends PApplet {
 	
 	public void draw() {			
 		background(0);
+		displayTasks();
+	}
+
+	public void displayTasks() {
+		float Bord = width / 16;
+		float txtBord = width / 5;
+		textAlign(CENTER, CENTER);
+		stroke(255);
+
+		for(int i = 1; i < 31; i++) {
+			float x = map(i, 1, 30, txtBord, width - Bord);
+			line(x, Bord, x, height - Bord);
+			text(i, x, Bord / 2);
+		}
 	}
 
 	ArrayList<Task> tasks = new ArrayList<Task>();
