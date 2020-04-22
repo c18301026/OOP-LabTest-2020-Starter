@@ -3,44 +3,34 @@
 
 package ie.tudublin;
 
+import java.util.ArrayList;
 import processing.core.PApplet;
 
-public class Gantt extends PApplet
-{	
-	
-	public void settings()
-	{
+public class Gantt extends PApplet {	
+	public void settings() {
 		size(800, 600);
 	}
 
-	public void loadTasks()
-	{
-		
+	public void loadTasks() {
 	}
 
-	public void printTasks()
-	{
-		
+	public void printTasks() {	
 	}
 	
-	public void mousePressed()
-	{
+	public void mousePressed() {
 		println("Mouse pressed");	
 	}
 
-	public void mouseDragged()
-	{
+	public void mouseDragged() {
 		println("Mouse dragged");
 	}
 
-	
-	
-	public void setup() 
-	{
+	public void setup() {
 	}
 	
-	public void draw()
-	{			
+	public void draw() {			
 		background(0);
 	}
+
+	ArrayList<Task> tasks = new ArrayList<Task>();
 }
