@@ -29,15 +29,55 @@ public class Gantt extends PApplet {
 	}
 	
 	public void mousePressed() {
-		cursor(MOVE);	
+		float Bord = width / 16;
+		float txtBord = width / 5;
+		float taskH = Bord / 1.5f;
+		float slideW = 10;
+
+		for(Task ts : tasks) {
+			float startX = map(ts.getStart(), 1, 30, txtBord, width - Bord);
+			float endX = map(ts.getEnd(), 1, 30, txtBord, width - Bord);
+			float y = map(tasks.indexOf(ts), 0, tasks.size(), Bord * 2, height - txtBord);
+
+			stroke(255);
+			fill(0);
+
+			if(
+				((mouseX > startX) && (mouseX < startX + slideW)) && 
+				(mouseY > (y - (taskH / 2))) && (mouseY < (y + (taskH / 2)))
+			) {
+				ts.setGotStart(true);
+			}
+			if(
+				((mouseX < endX) && (mouseX > endX - slideW)) && 
+				(mouseY > (y - (taskH / 2))) && (mouseY < (y + (taskH / 2)))
+			) {
+				ts.setGotEnd(true);
+			}
+		}
 	}
 
 	public void mouseReleased() {
-		cursor(ARROW);
+		for(Task ts : tasks) {
+			ts.setGotStart(false);
+			ts.setGotEnd(false);
+		}
 	}
 
 	public void mouseDragged() {
-		println("Mouse dragged");
+		float Bord = width / 16;
+		float txtBord = width / 5;
+
+		for(Task ts : tasks) {
+			float x = map(mouseX, txtBord, width - Bord, 1, 30);
+
+			if(ts.getGotStart()) {
+				if(((int) x < ts.getEnd()) && (x > 1)) ts.setStart((int) x);
+			}
+			if(ts.getGotEnd()) {
+				if(((int) x > ts.getStart()) && (x < 31)) ts.setEnd((int) x);
+			}
+		}
 	}
 
 	public void setup() {
