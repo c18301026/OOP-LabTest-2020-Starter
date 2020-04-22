@@ -29,7 +29,11 @@ public class Gantt extends PApplet {
 	}
 	
 	public void mousePressed() {
-		println("Mouse pressed");	
+		cursor(MOVE);	
+	}
+
+	public void mouseReleased() {
+		cursor(ARROW);
 	}
 
 	public void mouseDragged() {
