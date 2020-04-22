@@ -46,4 +46,8 @@ public class Task {
 			tr.getInt("End")
 		);
 	}
+
+	public String toString() {
+		return task + "\t" + start + "\t" + end;
+	}
 }
