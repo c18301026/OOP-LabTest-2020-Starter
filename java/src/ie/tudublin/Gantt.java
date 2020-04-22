@@ -1,3 +1,6 @@
+// Student Name: Rianlee Pineda
+// Student Number: C18301026
+
 package ie.tudublin;
 
 import processing.core.PApplet;
