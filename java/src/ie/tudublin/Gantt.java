@@ -45,15 +45,11 @@ public class Gantt extends PApplet {
 			if(
 				((mouseX > startX) && (mouseX < startX + slideW)) && 
 				(mouseY > (y - (taskH / 2))) && (mouseY < (y + (taskH / 2)))
-			) {
-				ts.setGotStart(true);
-			}
+			) ts.setGotStart(true);
 			if(
 				((mouseX < endX) && (mouseX > endX - slideW)) && 
 				(mouseY > (y - (taskH / 2))) && (mouseY < (y + (taskH / 2)))
-			) {
-				ts.setGotEnd(true);
-			}
+			) ts.setGotEnd(true);
 		}
 	}
 
