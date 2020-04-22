@@ -8,7 +8,10 @@ import processing.core.PApplet;
 import processing.data.Table;
 import processing.data.TableRow;
 
-public class Gantt extends PApplet {	
+public class Gantt extends PApplet {
+	ArrayList<Task> tasks = new ArrayList<Task>();
+	float bord, txtBord, taskH;
+
 	public void settings() {
 		size(800, 600);
 	}
@@ -29,15 +32,12 @@ public class Gantt extends PApplet {
 	}
 	
 	public void mousePressed() {
-		float Bord = width / 16;
-		float txtBord = width / 5;
-		float taskH = Bord / 1.5f;
 		float slideW = 10;
 
 		for(Task ts : tasks) {
-			float startX = map(ts.getStart(), 1, 30, txtBord, width - Bord);
-			float endX = map(ts.getEnd(), 1, 30, txtBord, width - Bord);
-			float y = map(tasks.indexOf(ts), 0, tasks.size(), Bord * 2, height - txtBord);
+			float startX = map(ts.getStart(), 1, 30, txtBord, width - bord);
+			float endX = map(ts.getEnd(), 1, 30, txtBord, width - bord);
+			float y = map(tasks.indexOf(ts), 0, tasks.size(), bord * 2, height - txtBord);
 
 			stroke(255);
 			fill(0);
@@ -65,11 +65,8 @@ public class Gantt extends PApplet {
 	}
 
 	public void mouseDragged() {
-		float Bord = width / 16;
-		float txtBord = width / 5;
-
 		for(Task ts : tasks) {
-			float x = map(mouseX, txtBord, width - Bord, 1, 30);
+			float x = map(mouseX, txtBord, width - bord, 1, 30);
 
 			if(ts.getGotStart()) {
 				if(((int) x < ts.getEnd()) && (x > 1)) ts.setStart((int) x);
@@ -83,6 +80,9 @@ public class Gantt extends PApplet {
 	public void setup() {
 		loadTasks();
 		printTasks();
+		bord = width / 16;
+		txtBord = width / 5;
+		taskH = bord / 1.5f;
 	}
 	
 	public void draw() {			
@@ -91,8 +91,6 @@ public class Gantt extends PApplet {
 	}
 
 	public void displayTasks() {
-		float Bord = width / 16;
-		float txtBord = width / 5;
 		textAlign(CENTER, CENTER);
 		stroke(255);
 		fill(255);
@@ -100,9 +98,9 @@ public class Gantt extends PApplet {
 		rectMode(CORNERS);
 
 		for(int i = 1; i < 31; i++) {
-			float x = map(i, 1, 30, txtBord, width - Bord);
-			line(x, Bord, x, height - Bord);
-			text(i, x, Bord / 2);
+			float x = map(i, 1, 30, txtBord, width - bord);
+			line(x, bord, x, height - bord);
+			text(i, x, bord / 2);
 		}
 
 		textAlign(LEFT, CENTER);
@@ -110,10 +108,9 @@ public class Gantt extends PApplet {
 
 		for(Task ts : tasks) {
 			float txtX = txtBord / 4;
-			float y = map(tasks.indexOf(ts), 0, tasks.size(), Bord * 2, height - txtBord);
-			float taskX = map(ts.getStart(), 1, 30, txtBord, width - Bord);
-			float taskH = Bord / 1.5f;
-			float taskEnd = map(ts.getEnd(), 1, 30, txtBord, width - Bord);
+			float y = map(tasks.indexOf(ts), 0, tasks.size(), bord * 2, height - txtBord);
+			float taskX = map(ts.getStart(), 1, 30, txtBord, width - bord);
+			float taskEnd = map(ts.getEnd(), 1, 30, txtBord, width - bord);
 			float hue = map(tasks.indexOf(ts), 0, tasks.size(), 0, 255);
 
 			fill(hue, 255, 255);
@@ -123,6 +120,4 @@ public class Gantt extends PApplet {
 			text(ts.getTask(), txtX, y);
 		}
 	}
-
-	ArrayList<Task> tasks = new ArrayList<Task>();
 }

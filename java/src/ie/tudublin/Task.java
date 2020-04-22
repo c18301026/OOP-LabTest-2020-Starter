@@ -8,7 +8,8 @@ import processing.data.TableRow;
 public class Task {
 	private String task;
 	private int start, end;
-	private boolean gotStart, gotEnd;
+	private boolean gotStart = false;
+	private boolean gotEnd = false;
 
 	public String getTask() {
 		return task;
@@ -54,8 +55,6 @@ public class Task {
 		this.task = task;
 		this.start = start;
 		this.end = end;
-		this.gotStart = false;
-		this.gotEnd = false;
 	}
 
 	public Task(TableRow tr) {
@@ -64,11 +63,9 @@ public class Task {
 			tr.getInt("Start"),
 			tr.getInt("End")
 		);
-		this.gotStart = false;
-		this.gotEnd = false;
 	}
 
 	public String toString() {
-		return task + "\t" + start + "\t" + end;
+		return task + "\t" + start + "\t" + end; // + "\t" + gotStart + "\t" + gotEnd;
 	}
 }
