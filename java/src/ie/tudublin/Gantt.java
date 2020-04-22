@@ -52,6 +52,8 @@ public class Gantt extends PApplet {
 		textAlign(CENTER, CENTER);
 		stroke(255);
 		fill(255);
+		colorMode(HSB);
+		rectMode(CORNERS);
 
 		for(int i = 1; i < 31; i++) {
 			float x = map(i, 1, 30, txtBord, width - Bord);
@@ -60,12 +62,21 @@ public class Gantt extends PApplet {
 		}
 
 		textAlign(LEFT, CENTER);
+		noStroke();
 
 		for(Task ts : tasks) {
 			float txtX = txtBord / 4;
-			float txtY = map(tasks.indexOf(ts), 0, tasks.size(), Bord * 2, height - txtBord);
+			float y = map(tasks.indexOf(ts), 0, tasks.size(), Bord * 2, height - txtBord);
+			float taskX = map(ts.getStart(), 1, 30, txtBord, width - Bord);
+			float taskH = Bord / 1.5f;
+			float taskEnd = map(ts.getEnd(), 1, 30, txtBord, width - Bord);
+			float hue = map(tasks.indexOf(ts), 0, tasks.size(), 0, 255);
 
-			text(ts.getTask(), txtX, txtY);
+			fill(hue, 255, 255);
+			rect(taskX, y - (taskH / 2), taskEnd, y + (taskH / 2), 5);
+
+			fill(255);
+			text(ts.getTask(), txtX, y);
 		}
 	}
 
